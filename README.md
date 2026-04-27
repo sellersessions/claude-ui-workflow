@@ -49,8 +49,8 @@ Three real brands run through the full 10-stage workflow. All passed Stage 8 har
 | Brand | Original site | Workflow output | REFINE score | Notes |
 |---|---|---|---|---|
 | Re Tech UK | [retechuk.com](https://retechuk.com) | [retechuk-cycle3.netlify.app](https://retechuk-cycle3.netlify.app) | 27/30 | Editorial fashion. 0 patches needed — model gate routed to Stitch 3.1 Pro for copy fidelity, shipped clean on first audit. |
-| Databrill Core | databrill.com (private preview) | [databrill-core-cycle3.netlify.app](https://databrill-core-cycle3.netlify.app) | 27/30 | Dark-palette SaaS. 1 patch — Stage 8 hard-fail caught 4 missing `<h3>` titles in problem-grid that visual review missed. |
-| Push-Pull Agency | [pushpullagency.com](https://pushpullagency.com) | [pushpullagency-cycle4.netlify.app](https://pushpullagency-cycle4.netlify.app) *(deploy pending)* | 28/30 | Full-service Amazon agency. 1 refine pass — restored Stitch design language (massive 2-line hero, left icon rail, cobalt parallelogram clip-shapes, accent cards) while keeping all 45 locked strings verbatim. |
+| Databrill Core | [core.databrill.com](https://core.databrill.com) | [databrill-core-cycle3.netlify.app](https://databrill-core-cycle3.netlify.app) | 27/30 | Dark-palette SaaS. 1 patch — Stage 8 hard-fail caught 4 missing `<h3>` titles in problem-grid that visual review missed. |
+| Push-Pull Agency | [pushpullagency.com](https://pushpullagency.com) | *deploy pending* | 28/30 | Full-service Amazon agency. 1 refine pass — restored Stitch design language (massive 2-line hero, left icon rail, cobalt parallelogram clip-shapes, accent cards) while keeping all 45 locked strings verbatim. |
 
 All three deliverables started from a real URL → extract-flow ingestion → source-truth.json + locks.json → Stitch visual brief → Claude-written HTML merged with locked copy → 6-dimension REFINE audit → cycle reset gate.
 
