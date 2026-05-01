@@ -6,12 +6,59 @@
 
 <br/>
 
+![Pipeline](https://img.shields.io/badge/10--Stage-Pipeline-4A9BD9?style=for-the-badge)
+![Rules](https://img.shields.io/badge/165%2B-Design_Rules-6C5CE7?style=for-the-badge)
+![Cycles](https://img.shields.io/badge/Cycles_1--4-Closed-E74C3C?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Active-00B894?style=for-the-badge)
+
 **A 10-stage design pipeline that turns a brand brief into production-ready UI.**
 **165+ rules across 15 design-system databases ensure the output never looks like AI made it.**
 
+<!-- VIDEO PLACEHOLDER -->
+> **Walkthrough video** _(coming soon: recording this week. Replace this block with the YouTube embed once shipped.)_
+<!-- /VIDEO PLACEHOLDER -->
+
+```mermaid
+%%{init: {'theme': 'dark', 'themeVariables': {'clusterBkg': 'transparent', 'clusterBorder': '#8b949e', 'nodeTextColor': '#e8e8e8', 'primaryTextColor': '#e8e8e8'}}}%%
+flowchart LR
+    subgraph FOUND["Foundation (1-5)"]
+        direction LR
+        S1["1<br/>Intake"] --> S2["2<br/>URL"]
+        S2 --> S3["3<br/>Screenshot"]
+        S3 --> S4["4<br/>Validate"]
+        S4 --> S5["5<br/>Lock"]
+    end
+    subgraph CREATIVE["Creative (6-7)"]
+        direction LR
+        S6["6<br/>Brief"] --> S7["7<br/>Stitch"]
+    end
+    subgraph CYCLE["Audit + Cycle (8-10)"]
+        direction LR
+        S8["8<br/>Refine"] --> S9["9<br/>Retro"]
+        S9 --> S10["10<br/>Reset"]
+    end
+    FOUND --> CREATIVE --> CYCLE
+    CYCLE -.->|next cycle| FOUND
+
+    style S1 fill:none,stroke:#14B8A6,stroke-width:1px,color:#fff
+    style S2 fill:none,stroke:#14B8A6,stroke-width:1px,color:#fff
+    style S3 fill:none,stroke:#14B8A6,stroke-width:1px,color:#fff
+    style S4 fill:none,stroke:#14B8A6,stroke-width:1px,color:#fff
+    style S5 fill:none,stroke:#14B8A6,stroke-width:1px,color:#fff
+    style S6 fill:none,stroke:#8B5CF6,stroke-width:1px,color:#fff
+    style S7 fill:none,stroke:#8B5CF6,stroke-width:1px,color:#fff
+    style S8 fill:none,stroke:#EC4899,stroke-width:1px,color:#fff
+    style S9 fill:none,stroke:#F59E0B,stroke-width:1px,color:#fff
+    style S10 fill:none,stroke:#F59E0B,stroke-width:1px,color:#fff
+```
+
+> **Foundation 1-5** (teal): extracts brand DNA and locks the foundation.
+> **Creative 6-7** (purple): writes the design brief and Stitch paints it.
+> **Audit + Cycle 8-10** (pink + amber): refines, learns, and resets clean for the next brand.
+
 ---
 
-## The pitch
+## Why this exists
 
 You're an Amazon seller. You've got a product, a story, and a brand voice. What you don't have is six months of design school, a Figma certification, or a UX team on retainer. You want a landing page that looks like it cost £20K — without the £20K.
 
@@ -21,7 +68,7 @@ If you tried to run these ten steps yourself, you'd need to be a brand strategis
 
 ---
 
-## What you can build with this
+## What you can build
 
 Sourced from real Amazon-seller use cases — full reasoning + footnoted references in [`Google Stitch-10 ideas for amazon sellers.md`](./Google%20Stitch-10%20ideas%20for%20amazon%20sellers.md).
 
@@ -61,7 +108,7 @@ All three deliverables started from a real URL → extract-flow ingestion → so
 
 ---
 
-## The 10-stage workflow
+## How it works — the 10 stages
 
 The full canonical reference (with autonomy classes and per-stage pre-checks) is in [`PRE-CHECK-CHECKLISTS.md`](./PRE-CHECK-CHECKLISTS.md). The architecture is in [`DESIGN-PIPELINE-VISUAL.md`](./DESIGN-PIPELINE-VISUAL.md). What follows is the plain-English version.
 
@@ -233,8 +280,44 @@ Without itemising every rule (the full enumeration lives in [`DESIGN-PIPELINE-VI
 - **15 CSV design databases, 165+ rules** — colours, typography, page structure, anti-patterns, animation timing, accessibility, cognitive science, performance budgets
 - **4 quality gates** — design-token extraction, web-design guidelines, React performance, composition patterns
 - **6-dimension REFINE audit** — refinements, animation, polish, performance, anti-AI, HCI laws
-- **10 skills** orchestrated through Claude Code (`claude-ui-workflow`, `ui-ux-pro-max`, `emil-design-eng`, `web-design-guidelines`, `react-best-practices`, `composition-patterns`, `algorithmic-art`, `web-perf`, `claude-loom-workflow`, `show-notes-builder`)
-- **5 MCP integrations** — Stitch, 21st.dev Magic, NanoBanana2, Video Transcriber, Sequential Thinking
+- **10-stage pipeline** orchestrating Claude Code skills, MCPs (Stitch, 21st.dev Magic, NanoBanana2, Video Transcriber, Sequential Thinking), Playwright auth-persisted Chromium, and the 15 CSV rule databases — full per-stage tool map in [`DESIGN-PIPELINE-VISUAL.md`](./DESIGN-PIPELINE-VISUAL.md)
+
+---
+
+## What if...
+
+### ...you have a portfolio of brands?
+
+Stages 1 to 5 are mostly Class A (Claude end-to-end). Drop one URL per brand, walk away, come back to a folder of `tokens.json` + `locks.json` per brand. Stage 6 onward runs per-brand on demand. Adding a tenth brand has roughly the same cost as adding the second.
+
+### ...your VA does the brand-onboarding?
+
+The `/intake` skill walks them question-by-question, no Figma, no design background, no prompt-engineering. Lock the brand once, hand them `RUNBOOK.md`, and they ship landing pages that don't drift from your house style.
+
+### ...you don't have `extract-flow` cloned?
+
+Stage 2 falls back to plain `WebFetch`. Lower-confidence palette extraction, but the rest of the pipeline still runs. Stage 3 (Screenshot assist) is the rescue path when Stage 2 confidence is weak.
+
+### ...Stitch is offline or rate-limited?
+
+Stages 1 to 6 run regardless: they generate the brief. Stage 7 is the only Stitch dependency. You can hand the Stage 6 brief to any visual model (Claude artifacts, v0, Lovable, Cursor) and Stage 8 still audits the output the same way.
+
+### ...the cycle gets sharper over time?
+
+Stage 9 codifies findings into `PRE-CHECK-CHECKLISTS.md`. Cycle 1 logged 29 findings. Cycle 4 ran in ~50 minutes of active operator time, mostly Stitch taste calls. Each cycle's review collapses toward taste-only.
+
+---
+
+## Companion repos
+
+This repo ships with two siblings: same author, same operating principles, different production surface.
+
+| Repo | What it does |
+|---|---|
+| [`claude-remotion-flow`](https://github.com/sellersessions/claude-remotion-flow) | Programmatic video production. Treatment-driven, beat-synced, single-stem VO. |
+| [`claude-video-editing-flow`](https://github.com/sellersessions/claude-video-editing-flow) | Selection-led short-form cuts. Drop a video, tick candidates in markdown, render. |
+
+All three are designed to run alongside [`ClaudeFlow-Agent`](https://github.com/sellersessions/ClaudeFlow-Agent), the personal AI operating system that ties them together.
 
 ---
 
@@ -274,5 +357,5 @@ Latest deliverable: [`dogfood/2026-04-27-pushpullagency/full-page-merged.html`](
 
 ---
 
-*15 CSVs · 165+ rules · 10 skills · 5 MCPs · 4 quality gates · 1 pipeline.*
+*15 CSVs · 165+ rules · 10-stage pipeline · 5 MCPs · 4 quality gates.*
 *Last updated: 27 Apr 2026 — cycles 1–3 closed (~40 findings dispositioned), cycle-4 (Push-Pull) Stage 8 PASS, Stage 9–10 in progress.*
