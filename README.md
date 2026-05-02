@@ -14,9 +14,11 @@
 **A 10-stage design pipeline that turns a brand brief into production-ready UI.**
 **165+ rules across 15 design-system databases ensure the output never looks like AI made it.**
 
-<!-- VIDEO PLACEHOLDER -->
-> **Walkthrough video** _(coming soon: recording this week. Replace this block with the YouTube embed once shipped.)_
-<!-- /VIDEO PLACEHOLDER -->
+<!-- VIDEO -->
+https://github.com/user-attachments/assets/5c389483-5d53-4691-807f-5dc4068bfd2c
+
+> **Walkthrough video:** 65-second tour of the 10-stage pipeline. Full release: [v0.1-demo](https://github.com/sellersessions/claude-ui-workflow/releases/tag/v0.1-demo).
+<!-- /VIDEO -->
 
 ```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': {'clusterBkg': 'transparent', 'clusterBorder': '#8b949e', 'nodeTextColor': '#e8e8e8', 'primaryTextColor': '#e8e8e8'}}}%%
