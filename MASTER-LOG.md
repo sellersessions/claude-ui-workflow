@@ -2,7 +2,7 @@
 project: claude-ui-workflow
 status: active
 tier: 2
-last_session: 2026-04-27
+last_session: 2026-05-03
 tags: [design-pipeline, workflow, stitch, brand-ingestion, intake, prd-pivot, dogfood, v2-architecture, cycle-3]
 ---
 
@@ -10,86 +10,148 @@ tags: [design-pipeline, workflow, stitch, brand-ingestion, intake, prd-pivot, do
 
 ## Kickoff Prompt (copy after /compact or new session)
 
-Resume Claude UI Workflow — **Phase 1+3+4 of public-repo separation plan EXECUTED last session. Phase 2 force-push is the next destructive action. ARMED but gated.**
+Resume Claude UI Workflow — **two parallel tracks live: (a) cycle-5 brand-2 measurement curve queued, (b) UI-HUD mockup set v1 SHIPPED (6 pages, full nav, awaiting operator walkthrough + Loom + wiring plan).**
 
-### A. State of the working tree (post Session 16)
+### A0. UI-HUD mockup track (NEW — Session 18)
 
-- ✅ **Phase 1 (privacy scrub) DONE.** 21 files scrubbed in 3 grep-driven sweeps. 0 hits remain for `/Users/dannymcmillan`, `Danny`, `command-centre-memory`, `ChromaDB`, `loom.com`, `@gmail.com`. Cuts moved to **`/Users/dannymcmillan/Claude-Code-Projects-Restored/Claude-UI-Workflow_private/`** (sibling, 306MB held — `_archive`, `_kickoff`, `brands/sellersessions`, `brands/sellersessions-derived`, `brands/sellersessions-doc-derived`, `brands/snoozeshade-derived`). 3× `netlify.toml` templated to `.` 6 internal-tooling references generalised.
-- ✅ **Phase 3 (README rewrite) DONE.** Two new sections inserted between Stage 10 and Quickstart: "What you need to run this" (deps table — repo vs operator-brings) and "How fast is it?" (cycle-evidence narrative cycle-1 → cycle-4). Status section + footer freshened to "cycles 1–3 closed (~40 findings dispositioned), cycle-4 (Push-Pull) Stage 8 PASS, Stage 9–10 in progress."
-- ✅ **Phase 4 (OUTSTANDING-WORK trim) DONE.** Summary table at top of file: total findings, resolved+shipped, in-flight cycle-4, cycle-5 queue.
-- ✅ **Phase 5 partial DONE (local checks).** `.gitignore` covers `_captures/`, `node_modules/`, `.venv/`, `__pycache__/`. 3 netlify.toml clean of `/Users/` paths. 240MB repo, 6033 files on disk (most are gitignored — node_modules, _captures).
-- ⏸ **Phase 2 (force-push to sellersessions/claude-ui-workflow) HOLDING.** Plan kickoff hard-rule: "DO NOT force-push the new repo without explicit go-ahead." Session ran out of context before that go-ahead.
+Six static HTML pages now sit in `_ui-mockup/` covering the full 10-stage flow as a passive browser HUD that mirrors `_state/pipeline.json` while the terminal does the work. Pages: `start.html` (4-step wizard, horizontal click-through), `autonomous.html` (Stages 1-5 with per-stage artefacts: source preview, brand swatches, structure outline, moodboard skeletons), `review.html` (Stage 6 brief review gate — summary card, moodboard chooser, editable Stitch prompt, approve/adjust), `index.html` (Stage 7 mid-flow, signed off prior session), `refine.html` (Stage 8 post-ZIP audit — score grade, 6-dim table, drift list), `retro.html` (Stages 9-10 retro + 4-option reset gate + 10-stage timeline). Shared design tokens in `shared.css`. Sticky review-mode banner on every page (1 start → 6 retro, current = gold). Captures in `_captures/{start-wizard-clickthrough,autonomous-flow,review-stage6,refine-stage8,retro-stage910,full-flow}/`.
 
-### B. Phase 2 — what runs when you green-light it
+**Resume path:**
+1. Operator clicks through all 6 pages locally (`python3 -m http.server` from `_ui-mockup/`).
+2. Operator records a Loom flagging anything off.
+3. From the Loom transcript, build a wiring plan: how `_state/pipeline.json` flows, polling vs filesystem watcher, kickoff command landing on autonomous, ZIP drop on refine auto-firing `/refine` in terminal, `localStorage` for run state, postMessage between pages or single-app rewrite.
 
-```bash
-# 1. Untrack from parent
-cd /Users/dannymcmillan/Claude-Code-Projects-Restored
-git rm --cached -r Claude-UI-Workflow/
-git commit -m "untrack Claude-UI-Workflow — moving to its own repo"
 
-# 2. Init Claude-UI-Workflow as own repo
-cd Claude-UI-Workflow
-git init
-git remote add origin https://github.com/sellersessions/claude-ui-workflow.git
-git branch -M main
 
-# 3. Stage + commit current state (post-scrub)
-git add -A
-git commit -m "initial public repo — Claude UI Workflow v1.0 (post-scrub)"
+### A. State of the working tree (post Session 17)
 
-# 4. Force-push (replaces 55-file old snapshot)
-git push -u origin main --force
-```
+- ✅ **Public-repo separation EXECUTED.** Force-push of post-scrub state landed at `sellersessions/claude-ui-workflow` (commit `40e0cd2` → `50324d4`). Operator flipped visibility back to PRIVATE post-deploy. Repo now standalone (own `.git`, no longer nested under parent index).
+- ✅ **Push-Pull cycle-4 deployed.** Site `pushpullagency-cycle4` (Netlify ID `a9dfa2c4-...`), live at https://pushpullagency-cycle4.netlify.app, 200 + correct `<title>`. README before/after table now has all 3 sample brands clickable (Re Tech UK, Databrill Core via `core.databrill.com`, Push-Pull Agency).
+- ✅ **Cycle-4 LOCKED.** Stage 9 retro (findings #41-44) + Stage 10 lock written. REFINE 28/30, audit PASS 45/45 strings + 15/15 anti-drift absent, 0 fixes applied — first clean Stage-8 in project history. Methodology note added: REFINE measures **design-system application consistency in shipped artifact**, not Stitch-vs-source fidelity.
+- ✅ **README fixes pushed.** `databrill.com (private preview)` → `[core.databrill.com](https://core.databrill.com)` (live 200). `pushpullagency-cycle4.netlify.app` placeholder → live link.
 
-Then **Phase 5 final + visibility flip:**
+### B. Resume path — Brand 2 of measurement curve
 
-```bash
-# Clone-test smoke
-git clone /Users/dannymcmillan/Claude-Code-Projects-Restored/Claude-UI-Workflow /tmp/clone-test/
-cd /tmp/clone-test && python3 scripts/audit-copy.py --help   # must not error
+Cycle-4 is the second data point on the honest-measurement curve (after cycle-3's Databrill). Cycle-5's first action is **Brand 2** with a non-Shopify CMS to test whether the Stage-1-6 ~8-min floor holds:
 
-# Public flip
-gh repo edit sellersessions/claude-ui-workflow --visibility public --accept-visibility-change-consequences
-```
+1. Operator picks a URL — WordPress / Webflow / hand-rolled all good. Different CMS preferred so we sample more of the extract-flow Tier-0 surface.
+2. Run `/intake <url>` — extract-flow ingests, builds `source-truth.json` + `locks.json` (schema v2 by default).
+3. Time stages 1-6, capture friction live in `TIME-LOG.md` (cycle-5 #43 → stricter live capture this time).
+4. Stage 7 (Stitch) — run model-gate; `must_preserve_copy: true` → 3.1 Pro.
+5. Stage 8 audit via `scripts/audit-copy.py` (canonical invocation per cycle-5 spec).
+6. Cycle reset gate.
 
-After repo public:
-1. Netlify deploy `pushpullagency-cycle4` → README URL `(deploy pending)` → live.
-2. Stage 9 retro `dogfood/2026-04-27-pushpullagency/cycle-4-retro.md`.
-3. Stage 10 reset gate `cycle-4-locked.md`.
-4. Brand 2 of measurement curve — operator picks URL (different CMS preferred).
+### C. Cycle-5 infra queue
 
-### C. RESUME PATH
+1. **REFINE rubric direction** (retro #44) — pick: (a) keep single 6-dim total + methodology caveat, (b) Hero/Body band split, or (c) drop numeric total and keep binary gates.
+2. **Stricter live friction capture** during cycle execution (`/refine` skill prompts mid-cycle; cycle-4 `Friction notes` block stayed empty).
+3. **Backport schema-v2 `locks.json`** to Re Tech UK + Databrill brand dirs.
+4. **Update `PRE-CHECK-CHECKLISTS.md`** to canonicalise `audit-copy.py` invocation.
+5. **`mcp__stitch__*` MCP spike** as Stage-7 collapse candidate (out-of-cycle exploration).
+6. **Pricing / trust-ticker content-strategy call** (still open from cycle-3).
 
-1. Re-enable plan mode if you want to review the plan first → read `<your local plans dir>/synthetic-bubbling-island.md`. Plan is in fresh context already as Phase 2 commands above.
-2. Eyeball `Claude-UI-Workflow_private/` if you want to confirm what was cut (306MB held there).
-3. Eyeball README diff if not already done — Phase 3 additions live in lines 107–147 (new sections) and lines 226–245 (Status + footer).
-4. Green-light Phase 2 (one of):
-   - **One-shot:** "go" → I run all 4 git commands + Phase 5 smoke + visibility flip end-to-end.
-   - **Per-step:** confirm each Bash before it fires.
-   - **Push-only:** force-push, pause, then explicit go for visibility flip.
-
-### D. DO NOT (carry-over)
-
-- Force-push without explicit go-ahead this session (overwrites existing 55-file private snapshot).
-- Flip visibility without confirming Phase 5 grep sweep passed (it did — confirmed 27 Apr Session 16).
-- Deploy Push-Pull to Netlify before public repo separation lands.
-- Re-open Phase 1 scrub — it's done. Fresh grep ran clean.
-
-### E. Cycle-4 infra queue (deferred — cycle-5 spec)
-
-- `source-truth.json` schema v2 — `copy:` vs `meta:` split (cycle-3 #39)
-- `/lock` skill update — always emit `anti_drift_strings` field (cycle-3 #40)
-- `STITCH-MODEL-RULES.md` update — codify model-gate routing
-- Stage 7 pre-flight gate code — auto-route by `locks.json::must_preserve_copy`
-- Cycle-2 fix wave (#30/#31/#32/#33)
-- Retrofit Re Tech UK + Databrill `locks.json` to schema v2
-
-### F. Hard rules (carry-over)
+### D. Hard rules (carry-over)
 
 - Stitch Redesign mode = moodboard / visual brief only, never final deliverable when copy fidelity matters (#36).
 - Trust Stitch's rendered DOM, not chat narration (#26).
 - Don't use 3 Flash on multi-section homepages (#34) or fashion/lifestyle/image-led briefs (#21).
+- REFINE measures **design-system application consistency in shipped artifact**, not Stitch-vs-source fidelity (cycle-4 methodology note + retro #44).
+- Schema-v2 `locks.json` is the new default for `/intake`.
+
+### E. Repo state
+
+- Standalone repo: `sellersessions/claude-ui-workflow` (currently PRIVATE — operator's call).
+- Parent `Claude-Code-Projects-Restored` no longer tracks `Claude-UI-Workflow/` files (separated Session 17).
+- `Claude-UI-Workflow_private/` (306MB sibling) holds cuts from Phase 1 scrub — NOT for public push.
+- 3× live samples: retechuk-cycle3, databrill-core-cycle3, pushpullagency-cycle4 (all Netlify, all 200, all linked in README).
+
+---
+
+## Session 18 (2026-05-03 17:19 BST close) — UI-HUD mockup set v1 shipped: 6 pages built + cross-page nav wired + full state-of-flow visible end-to-end
+
+**Trigger:** Operator post-compact: *"Can we pick up from where we left off prior to compacting?"* — resumed mockup work after Session 11's start-wizard sign-off.
+
+### What landed
+
+- **`start.html` converted from vertical-stacked to horizontal click-through.** All 4 wizard screens stay in the same file but only one displays at a time. Next/Back swap, dots clickable for review-mode jumps, banner step links also navigate, ArrowLeft/ArrowRight wired. Step 4 (ready) now ends with "Watch Claude work →" → `autonomous.html`.
+- **`autonomous.html` built (Stages 1-5 with artefacts, not just ticks).** Mid-flight render: stages 1-3 done with full artefacts, stage 4 active (shimmering moodboard skeletons), stage 5 pending. Each stage emits a small visible thing: source preview thumbnail + URL + 4 stats; 8 brand swatches + Plus Jakarta Sans specimen + signature gradient bar; H1/H2 outline with section pattern notes; 4-up Nano Banana Pro placeholders; brief one-liner. Trust solution per Session 18 design: "by the time it lands at Stage 6, the user has seen 5 quick 'yes that looks right' moments already."
+- **`review.html` built (Stage 6 brief review gate).** 3-second summary card → brand row (read-only confirmation) → moodboard chooser (4-up, picked tagged gold) → collapsed structure outline → **editable Stitch prompt in full** (the literal text leaving the machine, 847 chars) → action row: Adjust (re-run a section) / Approve and continue. The "to-and-fro" deferred to one structured moment.
+- **`refine.html` built (Stage 8 post-ZIP audit).** ZIP card with file list → overall grade card (B+ 84/100, gradient letter, summary, 6 colour-coded score tags) → 6-dimension audit table (brand fidelity, structure match, copy accuracy, visual hierarchy, component reuse, code quality — score bars, findings, action pills `on spec` / `acceptable` / `fix`) → drift-from-brief list with `apply fix` buttons → action row: Re-audit / Apply all fixes / Lock and continue.
+- **`retro.html` built (Stages 9-10 retro + reset gate).** 2-column: left panel = auto-extracted retro grouped into "what worked / what didn't / lessons for next run"; right panel = 4-option reset gate (Lock and ship as primary, Another cycle same brief, New brief same source, Start over new URL — each with keyboard hint). Bottom: 10-stage timeline with per-stage elapsed, total 4m 12s, final 87/100.
+- **`shared.css` extracted.** Single source of truth for design tokens, topbar, hero strip, review-mode banner. Pages 3-6 link it; pages 1-2 keep inline because they predate the extraction (no point refactoring when both inline + shared resolve to the same vars).
+- **Cross-page nav wired end-to-end.** Sticky review-mode banner on every page = "1 start | 2 autonomous | 3 review | 4 stitch | 5 refine | 6 retro" (current = gold). Topbar prev/next arrows on every page match natural flow. Natural CTA daisy-chain: start step 4 → autonomous → review → index (Approve) → refine via topbar → retro (Lock and continue).
+
+### Decisions confirmed this session
+
+- **UI = passive HUD, terminal = engine, kickoff = copy-paste command.** No daemons, no watchers driving the terminal. Browser polls/watches `_state/pipeline.json` and re-renders. (Re-confirmed from Session 11 architecture call.)
+- **Mid-flight render beats terminal-state for the autonomous-flow mockup.** All three states (done / running / pending) visible in one screen is more informative than the climactic "all done" view.
+- **Stage 6 trust solution = artefacts during run + structured review gate + Stitch prompt visible-and-editable before send.** Confidence builds in three layers, replacing the missing chat back-and-forth.
+- **4-option reset gate at Stage 10.** Lock + ship (default), Another cycle (same brief, re-roll moodboard), New brief (same source), Start over (new URL).
+- **Wizard click-through > scroll.** Operator's first-pass review confirmed: "I want that when you click on next, it takes the next page" — vertical stack was overload, horizontal swap is calmer.
+
+### Files written/modified this session
+
+- `Claude-UI-Workflow/_ui-mockup/autonomous.html` — NEW, Stages 1-5 progress with artefacts.
+- `Claude-UI-Workflow/_ui-mockup/review.html` — NEW, Stage 6 brief review gate.
+- `Claude-UI-Workflow/_ui-mockup/refine.html` — NEW, Stage 8 post-ZIP audit.
+- `Claude-UI-Workflow/_ui-mockup/retro.html` — NEW, Stages 9-10 retro + reset.
+- `Claude-UI-Workflow/_ui-mockup/shared.css` — NEW, shared design tokens + topbar + banner.
+- `Claude-UI-Workflow/_ui-mockup/start.html` — MODIFIED, vertical stack → horizontal click-through, banner expanded to 6-page set.
+- `Claude-UI-Workflow/_ui-mockup/index.html` — MODIFIED, review-mode banner injected, topbar reset button → review/refine prev/next.
+- `Claude-UI-Workflow/_captures/{start-wizard-clickthrough,autonomous-flow,review-stage6,refine-stage8,retro-stage910,full-flow}/` — verification screenshots per page.
+
+### Open for next session
+
+1. **Operator walkthrough + Loom recording.** Click through all 6 pages locally, flag anything off, narrate how UI ↔ terminal should talk.
+2. **Wiring plan from Loom transcript.** `_state/pipeline.json` schema, polling cadence (or filesystem watcher), kickoff command lands the user on autonomous, ZIP drop on refine triggers `/refine` skill in terminal, run-state via localStorage or file mirror.
+3. **Decision: single-page app rewrite vs 6 separate HTMLs.** Current = 6 files with hard-link nav. Wiring is simpler with one page that swaps panels, but loses the dev ergonomic of editing each stage in isolation.
+4. **Cycle-5 brand-2 measurement curve still queued** (separate track — see Section A of kickoff above, points 1-6 unchanged).
+
+---
+
+## Session 17 (2026-04-28 04:30 BST close) — Public-repo separation EXECUTED end-to-end + Push-Pull deployed + cycle-4 LOCKED (28/30, methodology note added)
+
+**Trigger:** Operator: *"One shot."* — green-lit Phase 2 force-push end-to-end after Session 16's stop-at-gate.
+
+### What landed
+
+- **Phase 2 force-push DONE.** Parent untracked Claude-UI-Workflow (commit `bd46b79`, 444 files removed from index). New repo init + remote add + main branch + initial commit (`40e0cd2`, 453 files post-scrub) + force-push to `sellersessions/claude-ui-workflow` (overwrote 55-file private snapshot `6c2654b`). Phase 5 clone-test smoke PASS (`audit-copy.py --help` exit 0). Visibility flipped PUBLIC then operator flipped back to PRIVATE post-deploy review.
+- **Push-Pull cycle-4 Netlify deploy.** New site `pushpullagency-cycle4` created via `netlify sites:create --account-slug sellersessions`, deploy live in 3.5s build, 200 + correct title (`Push-Pull Amazon Marketing | Full Service Amazon Agency`). Deploy artifacts committed: `deploy/pushpullagency-cycle4/{index.html, netlify.toml}`.
+- **README fixes.** `databrill.com (private preview)` → `[core.databrill.com](https://core.databrill.com)` (verified 200). Push-Pull `*deploy pending*` placeholder → live `pushpullagency-cycle4.netlify.app` link. `.gitignore` auto-update from netlify CLI committed (commit `d0078f3`).
+- **Cycle-4 retro + lock written** (background agent, ~2 min). Findings #41-44: audit-script primitive validated, Stitch is Stage-7 floor, schema-v2 locks closes #39+#40, **REFINE rubric mismatch with hybrid deliverable**. REFINE 28/30 (Color 5 / Type 5 / Spacing 5 / Layout 4 / Content 5 / Polish 4). Audit PASS 45/45 strings + 15/15 anti-drift absent — first clean Stage-8 in project history, 0 fixes applied.
+- **Methodology note codified.** Lock file now states REFINE measures **design-system application consistency in shipped artifact**, not Stitch-vs-source fidelity. Cross-cycle totals comparable on shipped-quality axis. Cycle-5 to decide: keep single total + caveat / split Hero+Body bands / drop numeric total.
+
+### Decisions confirmed this session
+
+- **One-shot Phase 2 was the right call.** Plan kickoff hard-rule "no force-push without explicit go-ahead" honoured — operator typed "One shot" before any destructive action fired.
+- **Repo private, not public, post-deploy.** Operator's call. Doesn't affect workflow — samples are public via Netlify URLs regardless.
+- **Option A for REFINE methodology** (single total + caveat). Option B (Hero+Body split) and Option C (drop scoring) deferred to cycle-5 — tunable as we go through more brands.
+- **Site-create requires `--account-slug sellersessions`** to bypass interactive team prompt in non-TTY mode. Codifying for future brand deploys.
+
+### Files written/modified this session
+
+- `Claude-UI-Workflow/dogfood/2026-04-27-pushpullagency/cycle-4-retro.md` — Stage 9 retro, findings #41-44.
+- `Claude-UI-Workflow/dogfood/2026-04-27-pushpullagency/cycle-4-locked.md` — Stage 10 lock with methodology note.
+- `Claude-UI-Workflow/deploy/pushpullagency-cycle4/{index.html, netlify.toml}` — Netlify deploy artifacts.
+- `Claude-UI-Workflow/README.md` — URL fixes (core.databrill.com link, Push-Pull relink).
+- `Claude-UI-Workflow/.gitignore` — netlify CLI local state ignore.
+- `Claude-UI-Workflow/MASTER-LOG.md` — kickoff rewrite (post-cycle-4-locked) + this Session 17 entry.
+
+**Public commits this session** (`sellersessions/claude-ui-workflow` main):
+- `40e0cd2` — initial public repo (post-scrub, 453 files)
+- `7bf0cad` — fix README: link core.databrill.com, de-link Push-Pull until deploy
+- `6b746f0` — deploy Push-Pull cycle-4 to Netlify; relink in README
+- `d0078f3` — gitignore: ignore netlify CLI local state dir
+- `50324d4` — close cycle-4: retro + lock + methodology note
+
+**Parent repo commit** (`sellersessions/Claude-Code-Projects` main):
+- `bd46b79` — untrack Claude-UI-Workflow — moving to its own repo
+
+### Open for next session
+
+1. **Brand 2 of measurement curve** — operator picks non-Shopify URL (WordPress / Webflow / hand-rolled). Cycle-5 begins.
+2. **REFINE rubric direction call** (retro #44) — single total + caveat / Hero+Body split / drop scoring.
+3. **Cycle-5 infra queue** (full list in kickoff Section C).
 
 ---
 
