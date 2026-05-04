@@ -2,7 +2,7 @@
 project: claude-ui-workflow
 status: active
 tier: 2
-last_session: 2026-05-03
+last_session: 2026-05-04
 tags: [design-pipeline, workflow, stitch, brand-ingestion, intake, prd-pivot, dogfood, v2-architecture, cycle-3]
 ---
 
@@ -10,7 +10,7 @@ tags: [design-pipeline, workflow, stitch, brand-ingestion, intake, prd-pivot, do
 
 ## Kickoff Prompt (copy after /compact or new session)
 
-Resume Claude UI Workflow — **two parallel tracks live: (a) cycle-5 brand-2 measurement curve queued, (b) UI-HUD mockup set v1 SHIPPED (6 pages, full nav, awaiting operator walkthrough + Loom + wiring plan).**
+Resume Claude UI Workflow — **three parallel tracks live: (a) cycle-5 brand-2 measurement curve queued, (b) UI-HUD mockup set v1 SHIPPED (6 pages, full nav, awaiting operator walkthrough + Loom + wiring plan), (c) SSL 2027 Loom walkthrough — Stage 1 prep + Stage 2 dry-run COMPLETE (Session 19), Stage 3 = Saturday batch real-Loom record. Plan file: `~/.claude/plans/i-am-batch-recording-functional-quokka.md`. Pre-record reset: revert `sellersessions-design-system/src/App.tsx` import to `SSLive2026` (currently on `SSLive2027` from dry-run). Stitch fallback ZIP captured at `Claude-UI-Workflow/_captures/loom-ssl-2027/stitch-export/` (the AETHER hallucination — used as moodboard demo material).**
 
 ### A0. UI-HUD mockup track (NEW — Session 18)
 
@@ -64,6 +64,66 @@ Cycle-4 is the second data point on the honest-measurement curve (after cycle-3'
 - Parent `Claude-Code-Projects-Restored` no longer tracks `Claude-UI-Workflow/` files (separated Session 17).
 - `Claude-UI-Workflow_private/` (306MB sibling) holds cuts from Phase 1 scrub — NOT for public push.
 - 3× live samples: retechuk-cycle3, databrill-core-cycle3, pushpullagency-cycle4 (all Netlify, all 200, all linked in README).
+
+---
+
+## Session 19 (2026-05-04 18:47 BST close) — SSL 2027 Loom walkthrough plan + Stage 1 prep + Stage 2 dry-run COMPLETE; SSLive2027.tsx built end-to-end via methodology, demo-pipeline validated
+
+**Trigger:** Operator: *"I am batch recording videos for the conference this weekend... I need to record the walk-through of the Claude UI flow. The purpose of this session is for you to start planning it... make the landing page for Seller Sessions Live 2027."*
+
+### What this session is
+
+Saturday's video batch covers 5 walkthroughs (claude-remotion-flow + claude-video-editing-flow). The 6th = Claude UI Workflow demo, and the demo's deliverable is the SSL 2027 landing page (doubles as conference promo). This session plans the Loom and pre-stages everything so on-camera time stays around 12-15 min raw with zero stalls.
+
+### What landed
+
+- **Plan written + approved:** `~/.claude/plans/i-am-batch-recording-functional-quokka.md`. 3-stage shape (Stage 1 prep autonomous, Stage 2 dry-run autonomous, Stage 3 real Loom record on Saturday). 10-step demo flow on-camera (steps 1-7 Claude autonomous, step 8 operator handoff to Stitch, steps 9-10 Claude reads Stitch image as moodboard + writes TSX).
+- **Discovery surprise:** `sellersessions-design-system/src/pages/SSLive2027PreSell.tsx` already existed at v8 (508 lines), a 72-hour post-event flash page for £499.50/£999. Operator needs the EVERGREEN main 2027 landing (same price as 2026, £999), so the pre-sell becomes the hidden north-star safety net for the demo, not the deliverable.
+- **Stage 1 prep, ALL DONE:**
+  - 2026 page HTTP tier-1 fetch succeeded (133KB, valid title/meta), cached at `_captures/loom-ssl-2027/ssl2026-source.html`. No anti-bot hit.
+  - Brand profile verified: `Claude-UI-Workflow_private/brands/sellersessions/{profile.md, tokens.json}`, tokens align with `sellersessions-design-system/tailwind.config.js` (ss-purple #461499, ss-accent #753EF7, ss-gold #FBBF24, ss-orange #F97316, ss-bg #0C0322).
+  - Repo staged for record: `SSLive2027PreSell.tsx` renamed to `.SSLive2027PreSell.tsx.bak` (dot-prefixed, TS skips, IDE tree invisible). `App.tsx` routed to `SSLive2026` baseline as the on-camera starting visual.
+  - Stitch prompt drafted: `_captures/loom-ssl-2027/stitch-prompt-ssl2027.md`. Pro 3.1 path, no reference image, anti-hallucination block, [EXACT TEXT] markers on every literal copy line, 12 sections (omits speakers TBA + video for v1 per operator).
+- **Stage 1.4 outcome, Stitch ran live and hallucinated. Captured as fallback (the value):**
+  - Operator pasted prompt into Stitch web, downloaded ZIP. Extracted to `_captures/loom-ssl-2027/stitch-export/{screen.png, code.html, DESIGN.md}`.
+  - Stitch produced "AETHER Strategies / Quantum Velocity / Cryptographic Core", a fully hallucinated SaaS landing with zero SSL content. Exactly the failure mode predicted by `STITCH-MODEL-RULES.md` Findings #21 (Marvel superheroes) and #26 (Stitch self-narrates lies). Confirmed Pro can drift on first pass too.
+  - **Recovery applied:** treat output as moodboard ONLY (cycle-3 hard rule + memory pattern `stitch-visual-brief-merge`). Lifted aesthetic DNA (gold solid CTA, glassmorphic 3-card feature grid, KPI band rhythm, large media break) and held all locked SSL content from the prompt.
+- **Stage 2 dry-run, pipeline validated end-to-end:**
+  - `sellersessions-design-system/src/pages/SSLive2027.tsx` written, around 370 lines, 12 sections (S1 Hero through S12 Final CTA), reuses Container/Section/Card/Button/CTASection/HyperText/NeonGradientCard/WaveDivider/FAQ + lucide icons + framer-motion. All locked facts present verbatim: `May 8, 2027`, `St Ethelburga's Centre, London`, `£999`, `7 Times Running`, `Get Your Ticket — £999`, anchor quote `"The single best event in the Amazon space." — Adam Hiest`.
+  - `App.tsx` swapped to render `SSLive2027`. Vite HMR clean. Browser console 0 errors. Full-page Playwright capture at `_captures/loom-ssl-2027/dryrun-ssl2027-fullpage.png`.
+
+### Decisions confirmed this session
+
+- **Loom uses single-pass Pro 3.1**, not Refresh-then-Pro chain. Keeps demo elegant. Live failure expected (and got it on dry-run); recovery via "Stitch is a moodboard" is the demo's actual teaching moment, not a workaround.
+- **Pre-sell stays hidden, not deleted.** `.SSLive2027PreSell.tsx.bak` is the safety net + post-event flash file post-9-May. Two pages serve two jobs.
+- **2027 page = 12 sections, not 14.** Speakers section omitted (lineup TBA), video testimonials omitted (skip for v1, ship clean evergreen first). Operator's call captured before plan exit.
+- **Same price as 2026 = £999 evergreen.** Not the £499.50 pre-sell discount. Hard rule for the 2027 main landing.
+- **Discovery via local source over live scrape.** The live SSL 2026 WP page is a hydrated React shell; HTTP tier-1 returned WP wrapper, not JS-rendered DOM. Pivoted to reading `SSLive2026.tsx` (1055 lines) + `SSLive2026.spec.md` directly, same content, instant, more reliable. On-camera viewer still sees Claude "ingest the URL" as narrative framing.
+- **Stitch is teaching material on its own.** The hallucination output is curriculum gold for the Loom: it shows operators why Rule 6 ("never trust Stitch's self-narration") matters by demonstrating the failure mid-record. Don't suppress, frame.
+
+### Files written/modified this session
+
+In `Claude-UI-Workflow/_captures/loom-ssl-2027/` (gitignored):
+- `stitch-prompt-ssl2027.md` (NEW), Pro 3.1 prompt with anti-hallucination + [EXACT TEXT] markers + 12 sections.
+- `ssl2026-source.html` (NEW), 133KB cache of live 2026 page HTTP fetch (fallback for step 1).
+- `stitch-export/{screen.png, code.html, DESIGN.md}` (NEW), Stitch live ZIP extract (the AETHER hallucination, used as moodboard only).
+- `staged-ssl2026-baseline.png` (NEW), baseline render before swap.
+- `dryrun-ssl2027-fullpage.png` (NEW), full-page proof of Stage 2 success.
+- `live-ssl2026-fetch-attempt.png` (NEW), evidence of WP page hydration delay (why local source wins).
+
+In `sellersessions-design-system/` (committable):
+- `src/pages/SSLive2027.tsx` (NEW), 12 sections, around 370 lines, locked content, lifted Stitch DNA.
+- `src/pages/.SSLive2027PreSell.tsx.bak` (RENAMED, was `SSLive2027PreSell.tsx`), hidden via dot prefix.
+- `src/App.tsx` (MODIFIED), routes to `SSLive2027` (will swap back to `SSLive2026` pre-record).
+
+### Open for next session
+
+1. **Stage 3, Saturday Loom record.** Real Loom batch. Sequence: prep checklist run live (rename .bak, swap App.tsx to 2026 baseline, dev server up, Stitch logged in, Shottr armed), then the 10-step demo flow on camera. Operator narrates throughout, does the Stitch handoff at step 8.
+2. **Pre-record reset.** Currently `App.tsx` renders SSLive2027 from the dry-run. Before record: revert App.tsx to `SSLive2026` so the on-camera starting state is the 2026 baseline.
+3. **Compare-pass post-record.** Diff new `SSLive2027.tsx` vs `.SSLive2027PreSell.tsx.bak`. Pick which page ships to the WP draft, or merge best of both. NeonGradientCard usage in S10 is borrowed from 2026; pre-sell uses framer-motion intros more aggressively. Decision after Loom is in the can.
+4. **WP draft deploy.** `npm run deploy -- --page ssl2027` once compare-pass settles. Draft only, never `--promote` without explicit go.
+5. **Cycle-5 brand-2 measurement curve still queued** (separate track, see kickoff Section A/C). Not blocked by SSL 2027 Loom.
+6. **`mcp__stitch__*` MCP spike** still queued from Session 18, Stage-7 collapse candidate. Today's dry-run confirms Stitch web works end-to-end via clipboard+ZIP, so MCP spike is optimisation, not unblock.
 
 ---
 
