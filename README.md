@@ -15,9 +15,9 @@
 **165+ rules across 15 design-system databases ensure the output never looks like AI made it.**
 
 <!-- VIDEO -->
-https://github.com/user-attachments/assets/5c389483-5d53-4691-807f-5dc4068bfd2c
+<a href="https://pipeline-proof.netlify.app/explainers.html"><img src="assets/posters/walkthrough.jpg" alt="Claude UI Workflow walkthrough poster" width="100%"></a>
 
-> **Walkthrough video:** 65-second tour of the 10-stage pipeline. Full release: [v0.1-demo](https://github.com/sellersessions/claude-ui-workflow/releases/tag/v0.1-demo).
+> **Walkthrough video:** 65-second tour of the 10-stage pipeline. ▶ [Watch on pipeline-proof](https://pipeline-proof.netlify.app/explainers.html). Full release: [v0.1-demo](https://github.com/sellersessions/claude-ui-workflow/releases/tag/v0.1-demo).
 <!-- /VIDEO -->
 
 ```mermaid
