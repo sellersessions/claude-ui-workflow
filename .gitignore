@@ -16,3 +16,6 @@ __pycache__/
 # Env
 .env
 .env.local
+
+# Project archive (local only, never pushed)
+_archive/

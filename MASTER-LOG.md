@@ -67,6 +67,17 @@ Cycle-4 is the second data point on the honest-measurement curve (after cycle-3'
 
 ---
 
+## Session 20 (2026-10-24 10:17 BST close) - Stage 3 tidy: root archived, README rebuilt on the shared framework
+
+- Scope: public folder only. The private folder is parked by the operator; revisit after this folder is done (it was part of the Seller Sessions Live curriculum and may stay reachable).
+- Housekeeping, top level: `_archive/` added to `.gitignore`, 24 untracked and unreferenced root files (18 Stitch PNGs, 3 Stitch snapshots, 3 client snapshots) moved to `_archive/public-root-2026-10-24/`. Checks: untracked 24 to 0, 24 files at destination, `git check-ignore` confirms. Nothing deleted.
+- README rebuilt by danny-readme-builder: shell palette logos (dark, light, mono fallback), TL;DR, badge row in the locked colour order, walkthrough video kept (operator's rule), comparison table (design agency, Stitch alone), two theme-safe Mermaid blocks, Set-up SOP (7 steps), Test protocol (3 checks plus the Push-Pull audit as the real job, pass and negative case both run), Brand profiles corrected (Seller Sessions does not ship here), Architecture in six collapsed blocks, Tidy record, Build Timeline from git log, Status brought to May 2026 then this tidy. Old README and logos in `_archive/readme-2026-10-24/`.
+- Independent read-only audit: 13 concrete issues, all fixed and re-checked. Mechanical checks: 0 em or en dashes, 0 old palette hits, 1 H1 (logo), 2 callouts, 9 details blocks paired, every link and asset resolves.
+- Licence decided by the operator 2026-10-24 10:20 BST: MIT. `LICENSE` file added, `package.json` set to MIT, README placeholder replaced. GitHub render check happens on push. Not committed.
+- Jake routing written 2026-10-24 10:25 BST: root `ROUTING-AND-INDEX.md` (3 workspaces, 14 folders, 11 root documents, 5 naming rules), workspace files in `brands/`, `dogfood/`, `scripts/` (10 task rows), three-line `CLAUDE.md` pointer. Every real path checked on disk. README refreshed: timeline row, folder reference links.
+- Registry 2026-10-24 10:26 BST: 11 trigger keywords appended to the claude-ui-workflow entry (55 total) so "stitch" and "ui workflow" route here; dated backup taken.
+- Next: OUTSTANDING-WORK decision, commit, independent audit.
+
 ## Session 19 (2026-05-04 18:47 BST close) — SSL 2027 Loom walkthrough plan + Stage 1 prep + Stage 2 dry-run COMPLETE; SSLive2027.tsx built end-to-end via methodology, demo-pipeline validated
 
 **Trigger:** Operator: *"I am batch recording videos for the conference this weekend... I need to record the walk-through of the Claude UI flow. The purpose of this session is for you to start planning it... make the landing page for Seller Sessions Live 2027."*
