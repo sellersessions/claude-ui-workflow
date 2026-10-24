@@ -1,6 +1,6 @@
 # Routing and index, read first
 
-Written 24 Oct 2026 by the Jake folder system. Pointers only, no instructions. Three workspaces produce work; everything else is reference. Sizes are bytes; FLAG marks a file over 12,000, so open the named section, not the whole file.
+Written 24 Oct 2026 by the Jake folder system. Pointers only, no instructions. Three workspaces produce work; everything else is reference. Index regenerated 2026-10-24. Sizes are bytes; FLAG marks a file over 12,000, so open the named section, not the whole file.
 
 ## Which workspace for which work
 
@@ -40,9 +40,9 @@ Written 24 Oct 2026 by the Jake folder system. Pointers only, no instructions. T
 | `PRE-CHECK-CHECKLISTS.md` | 16,912 FLAG | 2026-04-27 | per-stage checks; open the one stage's section |
 | `STITCH-MODEL-RULES.md` | 9,464 | 2026-04-27 | before any Stitch generation |
 | `DESIGN-PIPELINE-VISUAL.md` | 22,231 FLAG | 2026-04-27 | when changing the architecture |
-| `MASTER-LOG.md` | 168,514 FLAG | 2026-05-04 | kickoff prompt and latest session only |
-| `OUTSTANDING-WORK.md` | 14,320 FLAG | 2026-04-27 | before starting a branch of work |
-| `README.md` | 41,900 FLAG | 2026-05-09 | the public front page; refresh with danny-readme-builder |
+| `MASTER-LOG.md` | 169,270 FLAG | 2026-10-24 | kickoff prompt and latest session only |
+| `OUTSTANDING-WORK.md` | 14,567 FLAG | 2026-10-24 | before starting a branch of work; April list, see its note |
+| `README.md` | 42,564 FLAG | 2026-10-24 | the public front page; refresh with danny-readme-builder |
 | `STAGE-CMD.md` | 1,159 | 2026-05-09 | on-stage cue card, May 2026 event |
 | `Design System Workflow Ideas.md` | 9,918 | 2026-04-27 | idea note, read only |
 | `Google Stitch-10 ideas for amazon sellers.md` | 18,852 FLAG | 2026-04-27 | idea note, read only |

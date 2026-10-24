@@ -3,7 +3,7 @@ project: claude-ui-workflow
 last_updated: 2026-10-24
 ---
 
-# Outstanding Work — Claude UI Workflow
+# Outstanding Work: Claude UI Workflow
 
 > **Note, 24 October 2026.** Everything below dates from April 2026. The SSL gate it was written against (9 May 2026) has passed. The list is kept as the record of what was queued; the upcoming project will re-shape it before any item is picked up.
 
